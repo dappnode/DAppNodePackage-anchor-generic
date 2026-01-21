@@ -1,0 +1,40 @@
+version: "2"
+fields:
+  - id: setup-mode
+    target:
+      type: environment
+      name: SETUP_MODE
+      service: operator
+    title: Setup Mode
+    description: |-
+      If this is the first install, choose "New operator". If you have an existing operator key, choose "Import Operator".
+    enum:
+      - "New Operator"
+      - "Import Operator"
+    required: true
+
+  - id: builder-proposals
+    target:
+      type: environment
+      name: BUILDER_PROPOSALS
+      service: operator
+    title: Builder Proposals
+    description: |-
+      Whether to enable MEV-boost block production.
+    enum:
+      - "true"
+      - "false"
+    required: true
+    default: "false"
+
+  - id: encrypted-private-key-file-path
+    target:
+      type: environment
+      name: PRIVATE_KEY_FILE_PATH
+      service: operator
+    title: Encrypted private key file path
+    secret: true
+    description: |
+      Provide the encrypted private key file path below.
+    required: true
+    if: { "setup-mode": { "enum": ["Import Operator"] } }
