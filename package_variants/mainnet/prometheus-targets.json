@@ -1,0 +1,12 @@
+[
+  {
+    "labels": {
+      "package": "anchor.dnp.dappnode.eth",
+      "service": "operator.anchor.dappnode",
+      "__metrics_path__": "/metrics"
+    },
+    "targets": [
+      "operator.anchor.dappnode:5164"
+    ]
+  }
+]

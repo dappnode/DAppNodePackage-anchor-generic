@@ -1,0 +1,11 @@
+services:
+  operator:
+    build:
+      args:
+        NETWORK: mainnet
+        P2P_PORT: 9100
+    ports:
+      - "9100:9100/tcp"
+      - "9100:9100/udp"
+    environment:
+      CORSDOMAIN: "http://anchor.dappnode"

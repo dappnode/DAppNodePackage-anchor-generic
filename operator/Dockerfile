@@ -14,10 +14,12 @@ ENV DATA_DIR=${DATA_DIR} \
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
+ADD ${STAKER_SCRIPTS_URL}/dvt_lsd_tools.sh /etc/profile.d/
+
 RUN apt-get update && \
     apt-get install -y curl && \
     apt-get clean && \
-    chmod +rx /usr/local/bin/entrypoint.sh
+    chmod +rx /etc/profile.d/dvt_lsd_tools.sh /usr/local/bin/entrypoint.sh
 
 # Placed here to rebuild less layers
 ENV NETWORK=${NETWORK}

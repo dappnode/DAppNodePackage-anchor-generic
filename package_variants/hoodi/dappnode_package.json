@@ -1,0 +1,15 @@
+{
+  "name": "anchor-hoodi.dnp.dappnode.eth",
+  "version": "0.1.0",
+  "globalEnvs": [
+    {
+      "envs": [
+        "EXECUTION_CLIENT_HOODI",
+        "CONSENSUS_CLIENT_HOODI"
+      ],
+      "services": [
+        "operator"
+      ]
+    }
+  ]
+}
