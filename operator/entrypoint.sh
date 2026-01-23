@@ -1,7 +1,5 @@
 #!/bin/bash
 
-OPERATOR_KEY_DIR=${DATA_DIR}/keys
-
 # shellcheck disable=SC1091 
 # Path is relative to the Dockerfile
 . /etc/profile
@@ -15,6 +13,14 @@ BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 if [ "${BUILDER_PROPOSALS}" = "true" ]; then
     echo "[INFO - entrypoint] Builder-proposals is enabled"
     EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--builder-proposals")
+fi
+
+
+# If importing existing key, we use the --password-file flag
+if [ "${SETUP_MODE}" = "Import Operator" ]; then
+    PASSWORD_FILE_PATH="/root/.anchor/password.txt"
+    echo "[INFO - entrypoint] Using existing key"
+    EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--password-file=${PASSWORD_FILE_PATH}")
 fi
 
 FLAGS="--network=${NETWORK} \

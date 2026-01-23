@@ -13,6 +13,8 @@ services:
     environment:
       LOG_LEVEL: info
       BUILDER_PROPOSALS: "false"
+      SETUP_MODE: ""
+      PASSWORD_FILE_PATH: ""
       EXTRA_OPTS: ""
 volumes:
   operator-data: {}

@@ -34,19 +34,19 @@ fields:
       service: operator
     title: Encrypted private key
     description: |
-      Upload the encrypted_private_key.json
+      Upload encrypted_private_key.json
     pattern: "\\.json"
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
 
-  - id: encrypted-private-key-password
+  - id: encrypted-private-key-password-file
     target:
-      type: environment
-      name: PRIVATE_KEY_PASS
+      type: fileUpload
+      path: /root/.anchor/password.txt
       service: operator
-    title: Encrypted private key password
-    secret: true
+    title: Encrypted private key password file
     description: |
-      Provide here the encrypted private key password.
+      Upload password.txt
+    pattern: "\\.txt"
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
