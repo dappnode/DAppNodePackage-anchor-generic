@@ -39,11 +39,11 @@
   },
   "license": "Apache-2.0",
   "links": {
-    "Homepage": "https://anchor.sigmaprime.io",
-    "Documentation": "https://anchor.sigmaprime.io",
-    "Support": "https://discord.com/invite/cyAszAh",
+    "Github Repository": "https://github.com/sigp/anchor",
+    "Documentation": "https://anchor.sigmaprime.io/introduction/",
     "SSV Network Explorer": "https://explorer.ssv.network/mainnet/overview",
     "SSV Web App": "http://app.ssv.network",
-    "SSV Testnet Faucet": "https://faucet.ssv.network/connect"
+    "SSV Testnet Faucet": "https://faucet.ssv.network/connect",
+    "Support": "https://discord.com/invite/cyAszAh"
   }
 }
