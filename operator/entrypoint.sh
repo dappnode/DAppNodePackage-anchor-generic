@@ -15,11 +15,9 @@ if [ "${BUILDER_PROPOSALS}" = "true" ]; then
     EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--builder-proposals")
 fi
 
-
-# If importing existing key, we use the --password-file flag
+# If Import Operator setup mode is selected, use the --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
     PASSWORD_FILE_PATH="/root/.anchor/password.txt"
-    echo "[INFO - entrypoint] Using existing key"
     EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--password-file=${PASSWORD_FILE_PATH}")
 fi
 
@@ -36,7 +34,6 @@ FLAGS="--network=${NETWORK} \
     --metrics \
     --metrics-address=0.0.0.0 \
     --metrics-port=5164 \
-    --listen-addresses=0.0.0.0 \
     --port=${P2P_PORT} $EXTRA_OPTS"
 
 echo "[INFO - entrypoint] Starting anchor with flags: $FLAGS"

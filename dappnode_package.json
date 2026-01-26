@@ -39,8 +39,9 @@
   },
   "license": "Apache-2.0",
   "links": {
-    "Github": "https://github.com/sigp/anchor",
+    "Readme": "https://github.com/dappnode/DAppNodePackage-Anchor",
     "Documentation": "https://anchor.sigmaprime.io/introduction/",
+    "Github": "https://github.com/sigp/anchor",
     "SSV Network Explorer": "https://explorer.ssv.network/mainnet/overview",
     "SSV Web App": "http://app.ssv.network",
     "SSV Testnet Faucet": "https://faucet.ssv.network/connect",

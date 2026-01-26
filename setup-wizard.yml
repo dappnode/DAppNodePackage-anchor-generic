@@ -34,7 +34,7 @@ fields:
       service: operator
     title: Encrypted private key
     description: |
-      Upload encrypted_private_key.json
+      Upload encrypted_private_key.json (must name the file exactly as shown)
     pattern: "\\.json"
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
@@ -46,7 +46,7 @@ fields:
       service: operator
     title: Encrypted private key password file
     description: |
-      Upload password.txt
+      Upload password.txt (must name the file exactly as shown)
     pattern: "\\.txt"
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }

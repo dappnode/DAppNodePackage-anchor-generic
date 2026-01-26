@@ -1,6 +1,6 @@
 # Anchor DAppNode Package
 
-Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by [Sigma Prime](https://sigmaprime.io). This DAppNode package provides a user friendly UX to run Anchor as a distributed validator client on your DAppNode. For more information about Anchor, refer to the official [documentation](https://anchor.sigmaprime.io/introduction).
+Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by [Sigma Prime](https://sigmaprime.io). This DAppNode package provides a user friendly UX to run Anchor as a SSV client on your DAppNode. For more information about Anchor, refer to the official [documentation](https://anchor.sigmaprime.io/introduction).
 
 To get started, once you have selected `Anchor` or `Anchor Hoodi` DAppNode package, it will prompt you to select the `Setup Mode`, either `New Operator` or `Import Operator`. 
 
