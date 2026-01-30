@@ -2,7 +2,7 @@
   "upstream": [
     {
       "repo": "sigp/anchor",
-      "version": "1.2.0",
+      "version": "v1.2.0",
       "arg": "UPSTREAM_VERSION"
     },
     {
