@@ -13,7 +13,6 @@ services:
     environment:
       LOG_LEVEL: info
       SETUP_MODE: ""
-      PASSWORD_FILE_PATH: ""
       EXTRA_OPTS: ""
 volumes:
   operator-data: {}
