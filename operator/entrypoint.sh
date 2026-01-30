@@ -9,10 +9,26 @@ EXECUTION_RPC=$(get_execution_rpc_api_url_from_global_env "$NETWORK")
 EXECUTION_WS=$(get_execution_ws_url_from_global_env "$NETWORK")
 BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
-# If Import Operator setup mode is selected, use the --password-file flag to decrypt the private key
+# If Import Operator, use the --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
     PASSWORD_FILE_PATH="/root/.anchor/password.txt"
     PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
+fi
+
+# If New Operator, generate a new public-private key pair, then only start Anchor
+if [ "${SETUP_MODE}" = "New Operator" ]; then
+    PASSWORD_FILE_PATH="/root/.anchor/password.txt"
+    PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
+    KEY_FILE="/root/.anchor/encrypted_private_key.json"
+
+    # If private key exists, then skip the key generation
+    if [ -f "$KEY_FILE" ]; then
+        echo "[INFO - entrypoint] Key already exists, skipping key generation"
+    else
+        echo "[INFO - entrypoint] Generating new public-private key pair"
+        # Use password file to encrypt the private key
+        anchor keygen --encrypt "$PASSWORD_FILE"
+    fi
 fi
 
 FLAGS="--network=${NETWORK} \

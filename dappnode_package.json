@@ -46,5 +46,12 @@
     "SSV Web App": "http://app.ssv.network",
     "SSV Testnet Faucet": "https://faucet.ssv.network/connect",
     "Support": "https://discord.com/invite/cyAszAh"
-  }
+  },
+  "backup": [
+    {
+      "name": "data",
+      "path": "/root/.anchor",
+      "service": "operator"
+    }
+  ]
 }
