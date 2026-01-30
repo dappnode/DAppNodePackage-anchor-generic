@@ -9,12 +9,6 @@ EXECUTION_RPC=$(get_execution_rpc_api_url_from_global_env "$NETWORK")
 EXECUTION_WS=$(get_execution_ws_url_from_global_env "$NETWORK")
 BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
-# If builder-proposals is selected to be "true" in the CONFIG, we add this flag when starting Anchor
-if [ "${BUILDER_PROPOSALS}" = "true" ]; then
-    echo "[INFO - entrypoint] Builder-proposals is enabled"
-    EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--builder-proposals")
-fi
-
 # If Import Operator setup mode is selected, use the --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
     PASSWORD_FILE_PATH="/root/.anchor/password.txt"
