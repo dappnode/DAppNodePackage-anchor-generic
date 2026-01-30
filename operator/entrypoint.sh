@@ -18,7 +18,7 @@ fi
 # If Import Operator setup mode is selected, use the --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
     PASSWORD_FILE_PATH="/root/.anchor/password.txt"
-    EXTRA_OPTS=$(add_flag_to_extra_opts_safely "${EXTRA_OPTS}" "--password-file=${PASSWORD_FILE_PATH}")
+    PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
 fi
 
 FLAGS="--network=${NETWORK} \
@@ -34,7 +34,8 @@ FLAGS="--network=${NETWORK} \
     --metrics \
     --metrics-address=0.0.0.0 \
     --metrics-port=5164 \
-    --port=${P2P_PORT} $EXTRA_OPTS"
+    --port=${P2P_PORT} \
+    $PASSWORD_FILE $EXTRA_OPTS"
 
 echo "[INFO - entrypoint] Starting anchor with flags: $FLAGS"
 

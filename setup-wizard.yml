@@ -13,20 +13,6 @@ fields:
       - "Import Operator"
     required: true
 
-  - id: builder-proposals
-    target:
-      type: environment
-      name: BUILDER_PROPOSALS
-      service: operator
-    title: Builder Proposals
-    description: |-
-      Whether to enable MEV-boost block production.
-    enum:
-      - "true"
-      - "false"
-    required: true
-    default: "false"
-
   - id: encrypted-private-key
     target:
       type: fileUpload
