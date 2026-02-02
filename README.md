@@ -4,21 +4,10 @@ Anchor is an open source implementation of the Secret Shared Validator (SSV) pro
 
 To get started, once you have selected `Anchor` or `Anchor Hoodi` DAppNode package, it will prompt you to select the `Setup Mode`, either `New Operator` or `Import Operator`. 
 
-If you do not have an existing public-private key pair or have not registered an operator on the SSV network website previously, that means you are a new operator. If this is the case, select `New Operator`. Anchor will start to
+If you do not have an existing public-private key pair or have not registered an operator on the SSV network website previously, that means you are a new operator. If this is the case, select `New Operator` and enter a password in the space provided. Anchor will generate a new public-private key pair, and then start to run Anchor. The Anchor node will start to sync, however, since the public key has not been registered on the SSV network, the node will not be performing any duties. You are required to register the public key as a new operator on the SSV network. Refer to the [SSV documentation](https://docs.ssv.network/operators/operator-management/registration/) on how to register a new operator. Once the on-chain transaction to register the new operator is confirmed, Anchor will be able to retrieve the operator info, and the node will be ready to perform validator duties.
 
-For new operators, refer to the [SSV documentation](https://docs.ssv.network/operators/operator-management/registration/) on how to register a new operator. Anchor will auto generate the public-private key pairs when starting fresh. You can view the public key by entering the following command in our DAppNode server:
+> Note: You are required to remember the password, in the case that you want to move the operator private key in the future, the password will be used to decrypt the private key so that you remain having access to the operator that you have registered on the SSV network.
 
-For mainnet:
+If you have a registered operator, you should already have a private key with you. In this case, choose `Import Operator`. Upload the encrypted private key file, the file name must be `encrypted_private_key.json`. Then, enter the password to decrypt the private key in the space provided. Then, Anchor will start to run and after a short time, you should see that Anchor will display the operator id on the log. Note that the upload option will only appear once on a fresh install and it can't be modified afterwards without deleting the whole Anchor package. 
 
-`docker exec DAppNodePackage-operator.anchor.dnp.dappnode.eth cat /root/.anchor/public_key.txt`
-
-For Hoodi testnet:
-
-`docker exec DAppNodePackage-operator.anchor-hoodi.dnp.dappnode.eth cat /root/.anchor/public_key.txt`
-
-Use this public key to register a new operator in the SSV network with the link above. We also strongly advise that you backup a copy of the private key file. The private key is named:
-
-`encrypted_private_key.json` in the same directory as the public key.
-
-If you have a registered operator, you should already have the private key with you. In this case, choose `Import Operator`. Upload the encrypted private key file, the file name must be `encrypted_private_key.json`. Then, upload the password file, the file name must be `password.txt` which contains the password to decrypt the private key. Note that the upload option will only appear once on a fresh install and it can't be modified afterwards without deleting the whole Anchor package.
-
+There is a `BACKUP` tab in the Anchor package. It enables you to download the Anchor data which includes the public-private key pair. We strongly recommend you to make a backup copy of the key pair.
