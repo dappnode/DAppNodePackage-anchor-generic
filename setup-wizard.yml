@@ -25,6 +25,19 @@ fields:
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
 
+  - id: existing-private-key-password
+    target:
+      type: environment
+      name: EXISTING_PASSWORD
+      service: operator
+    title: Password for the existing private key
+    secret: true
+    description: |
+      Enter the password for the existing private key
+    inputType: password
+    required: false
+    if: { "setup-mode": { "enum": ["Import Operator"] } }
+
   - id: encrypted-private-key-password-file
     target:
       type: fileUpload
@@ -34,7 +47,7 @@ fields:
     description: |
       Upload password.txt (must name the file exactly as shown)
     pattern: "\\.txt"
-    required: true
+    required: false
     if: { "setup-mode": { "enum": ["Import Operator"] } }
 
   - id: new-private-key-password-file
@@ -46,5 +59,20 @@ fields:
     description: |
       Upload a password file to encrypt your private key, name the file as: password.txt
     pattern: "\\.txt"
+    required: false
+    if: { "setup-mode": { "enum": ["New Operator"] } }
+
+  - id: new-private-key-password
+    target:
+      type: environment
+      name: NEW_PASSWORD
+      service: operator
+    title: Password for the new private key
+    secret: true
+    description: |
+      Enter a password to encrypt your private key
+
+      (Note: This password will be used to decrypt the private key. If you loss the password, you can no longer decrypt the operator private key)
+    inputType: password
     required: true
     if: { "setup-mode": { "enum": ["New Operator"] } }

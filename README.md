@@ -4,7 +4,7 @@ Anchor is an open source implementation of the Secret Shared Validator (SSV) pro
 
 To get started, once you have selected `Anchor` or `Anchor Hoodi` DAppNode package, it will prompt you to select the `Setup Mode`, either `New Operator` or `Import Operator`. 
 
-If you do not have an existing public-private key pair or have not registered an operator on the SSV network website previously, that means you are a new operator. 
+If you do not have an existing public-private key pair or have not registered an operator on the SSV network website previously, that means you are a new operator. If this is the case, select `New Operator`. Anchor will start to
 
 For new operators, refer to the [SSV documentation](https://docs.ssv.network/operators/operator-management/registration/) on how to register a new operator. Anchor will auto generate the public-private key pairs when starting fresh. You can view the public key by entering the following command in our DAppNode server:
 

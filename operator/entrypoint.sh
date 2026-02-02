@@ -9,27 +9,45 @@ EXECUTION_RPC=$(get_execution_rpc_api_url_from_global_env "$NETWORK")
 EXECUTION_WS=$(get_execution_ws_url_from_global_env "$NETWORK")
 BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
-# If Import Operator, use the --password-file flag to decrypt the private key
+PASSWORD_FILE_PATH="/root/.anchor/password.txt"
+
+# If Import Operator, save the EXISTING_PASSWORD to the password.txt,
+# Later when Anchor is starting it will use --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
-    PASSWORD_FILE_PATH="/root/.anchor/password.txt"
-    PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
+    echo "[INFO - entrypoint] Using existing password to import operator"
+    echo "[DEBUG] EXISTING_PASSWORD is set: $([ -n "$EXISTING_PASSWORD" ] && echo 'YES' || echo 'NO')"
+    echo "[DEBUG] encrypted_private_key.json exists: $([ -f /root/.anchor/encrypted_private_key.json ] && echo 'YES' || echo 'NO')"
+    echo "[DEBUG] password.txt exists: $([ -f "$PASSWORD_FILE_PATH" ] && echo 'YES' || echo 'NO')"
+    echo "$EXISTING_PASSWORD" > "$PASSWORD_FILE_PATH"
 fi
 
-# If New Operator, generate a new public-private key pair, then only start Anchor
+# If New Operator, generate a new public-private key pair
 if [ "${SETUP_MODE}" = "New Operator" ]; then
-    PASSWORD_FILE_PATH="/root/.anchor/password.txt"
-    PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
+    
     KEY_FILE="/root/.anchor/encrypted_private_key.json"
-
-    # If private key exists, then skip the key generation
+    # Check if the key file exists
     if [ -f "$KEY_FILE" ]; then
         echo "[INFO - entrypoint] Key already exists, skipping key generation"
     else
+    # If key file does not exist, generate a new key pair
         echo "[INFO - entrypoint] Generating new public-private key pair"
-        # Use password file to encrypt the private key
-        anchor keygen --encrypt "$PASSWORD_FILE"
+        # Use expect to handle interactive password prompts during key generation
+        # Use --data-dir to overwrite the default directory to the directory used in this DAppNode package
+        expect << EOF
+spawn anchor keygen --encrypt --data-dir /root/.anchor
+expect "Enter password for keyfile:"
+send "$NEW_PASSWORD\r"
+expect "Re-enter password to confirm:"
+send "$NEW_PASSWORD\r"
+expect eof
+EOF
+
+       # Save NEW_PASSWORD to the password file for use later
+       echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
     fi
 fi
+
+PASSWORD_FILE="--password-file=${PASSWORD_FILE_PATH}"
 
 FLAGS="--network=${NETWORK} \
     --data-dir=${DATA_DIR} \

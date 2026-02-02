@@ -14,5 +14,6 @@ services:
       LOG_LEVEL: info
       SETUP_MODE: ""
       EXTRA_OPTS: ""
+      EXISTING_PASSWORD: ""
 volumes:
   operator-data: {}
