@@ -30,24 +30,13 @@ fi
 if [ "${SETUP_MODE}" = "New Operator" ]; then
     
     # Check if the key file exists
-    if [ -f "$ENCRYPTED_PRIVATE_KEY" ]; then
+    if [ -f "$PASSWORD_FILE_PATH" ]; then
         echo "[INFO - entrypoint] Key already exists, skipping key generation"
     else
     # If key file does not exist, generate a new key pair
         echo "[INFO - entrypoint] Generating new public-private key pair"
-        # Use expect to handle interactive password prompts during key generation
-        # Use --data-dir to overwrite the default directory to the directory used in this DAppNode package
-        expect << EOF
-spawn anchor keygen --encrypt --data-dir /root/.anchor
-expect "Enter password for keyfile:"
-send "$NEW_PASSWORD\r"
-expect "Re-enter password to confirm:"
-send "$NEW_PASSWORD\r"
-expect eof
-EOF
-
-       # Save NEW_PASSWORD to the password file for use later
-       echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
+        echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
+        anchor keygen --encrypt --password-file="$PASSWORD_FILE_PATH" --data-dir /root/.anchor
     fi
 fi
 
