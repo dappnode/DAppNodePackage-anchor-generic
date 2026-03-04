@@ -6,10 +6,10 @@ services:
       args:
         UPSTREAM_VERSION: v1.2.0
         STAKER_SCRIPTS_VERSION: v0.1.2
-        DATA_DIR: /root/.anchor
     restart: unless-stopped
     volumes:
       - operator-data:/root/.anchor
+      - operator-keys:/root/keys
     environment:
       LOG_LEVEL: info
       SETUP_MODE: ""
@@ -17,3 +17,4 @@ services:
       EXISTING_PASSWORD: ""
 volumes:
   operator-data: {}
+  operator-keys: {}
