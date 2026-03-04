@@ -1,0 +1,12 @@
+[
+  {
+    "labels": {
+      "package": "anchor-hoodi.dnp.dappnode.eth",
+      "service": "operator.anchor-hoodi.dappnode",
+      "__metrics_path__": "/metrics"
+    },
+    "targets": [
+      "operator.anchor-hoodi.dappnode:5164"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+version: "3.5"
+services:
+  operator:
+    build:
+      context: operator
+      args:
+        UPSTREAM_VERSION: v1.2.0
+        STAKER_SCRIPTS_VERSION: v0.1.2
+        DATA_DIR: /root/.anchor
+    restart: unless-stopped
+    volumes:
+      - operator-data:/root/.anchor
+    environment:
+      LOG_LEVEL: info
+      SETUP_MODE: ""
+      EXTRA_OPTS: ""
+      EXISTING_PASSWORD: ""
+volumes:
+  operator-data: {}

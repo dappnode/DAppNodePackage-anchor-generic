@@ -1,0 +1,57 @@
+{
+  "upstream": [
+    {
+      "repo": "sigp/anchor",
+      "version": "v1.2.0",
+      "arg": "UPSTREAM_VERSION"
+    },
+    {
+      "repo": "dappnode/staker-package-scripts",
+      "version": "v0.1.2",
+      "arg": "STAKER_SCRIPTS_VERSION"
+    }
+  ],
+  "architectures": [
+    "linux/amd64",
+    "linux/arm64"
+  ],
+  "shortDescription": "Anchor",
+  "description": "Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by Sigma Prime.",
+  "type": "service",
+  "author": "DAppNode Association <admin@dappnode.io> (https://github.com/dappnode)",
+  "contributors": [
+    "Tan Chee Keong <tanck@sigmaprime.io> (https://github.com/chong-he)",
+    "Daniel Knopik <daniel@sigmaprime.io> (https://github.com/dknopik)"
+  ],
+  "categories": [
+    "Blockchain",
+    "ETH2.0"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dappnode/DAppNodePackage-Anchor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dappnode/DAppNodePackage-Anchor/issues"
+  },
+  "requirements": {
+    "minimumDappnodeVersion": "0.2.101"
+  },
+  "license": "Apache-2.0",
+  "links": {
+    "Readme": "https://github.com/dappnode/DAppNodePackage-Anchor",
+    "Documentation": "https://anchor.sigmaprime.io/introduction/",
+    "Github": "https://github.com/sigp/anchor",
+    "SSV Network Explorer": "https://explorer.ssv.network/mainnet/overview",
+    "SSV Web App": "http://app.ssv.network",
+    "SSV Testnet Faucet": "https://faucet.ssv.network/connect",
+    "Support": "https://discord.com/invite/cyAszAh"
+  },
+  "backup": [
+    {
+      "name": "data",
+      "path": "/root/.anchor",
+      "service": "operator"
+    }
+  ]
+}

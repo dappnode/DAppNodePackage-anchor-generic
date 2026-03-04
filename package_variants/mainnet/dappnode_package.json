@@ -1,0 +1,15 @@
+{
+  "name": "anchor.dnp.dappnode.eth",
+  "version": "0.1.0",
+  "globalEnvs": [
+    {
+      "envs": [
+        "EXECUTION_CLIENT_MAINNET",
+        "CONSENSUS_CLIENT_MAINNET"
+      ],
+      "services": [
+        "operator"
+      ]
+    }
+  ]
+}
