@@ -6,10 +6,10 @@ services:
       args:
         UPSTREAM_VERSION: v1.2.1
         STAKER_SCRIPTS_VERSION: v0.1.2
-        DATA_DIR: /root/.anchor
     restart: unless-stopped
     volumes:
       - operator-data:/root/.anchor
+      - operator-keys:/root/keys
     environment:
       LOG_LEVEL: info
       SETUP_MODE: ""
@@ -17,3 +17,7 @@ services:
       EXISTING_PASSWORD: ""
 volumes:
   operator-data: {}
+<<<<<<< dappnodebot/bump-upstream/sigp/anchor@v1.2.1,dappnode/staker-package-scripts@v0.1.2
+=======
+  operator-keys: {}
+>>>>>>> main

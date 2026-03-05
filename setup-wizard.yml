@@ -16,11 +16,11 @@ fields:
   - id: encrypted-private-key
     target:
       type: fileUpload
-      path: /root/.anchor/encrypted_private_key.json
+      path: /root/keys/encrypted_private_key.json
       service: operator
     title: Encrypted private key
     description: |
-      Upload encrypted_private_key.json (must name the file exactly as shown)
+      Upload encrypted_private_key.json
     pattern: "\\.json"
     required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
