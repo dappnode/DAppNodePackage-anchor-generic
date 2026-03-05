@@ -17,7 +17,4 @@ services:
       EXISTING_PASSWORD: ""
 volumes:
   operator-data: {}
-<<<<<<< dappnodebot/bump-upstream/sigp/anchor@v1.2.1,dappnode/staker-package-scripts@v0.1.2
-=======
   operator-keys: {}
->>>>>>> main
