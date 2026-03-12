@@ -15,6 +15,7 @@ services:
       SETUP_MODE: ""
       EXTRA_OPTS: ""
       EXISTING_PASSWORD: ""
+      NEW_PASSWORD: ""
 volumes:
   operator-data: {}
   operator-keys: {}
