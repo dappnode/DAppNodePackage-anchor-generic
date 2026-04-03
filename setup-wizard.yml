@@ -48,7 +48,7 @@ fields:
     description: |
       Enter a password to encrypt your private key
 
-      (Note: This password will be used to decrypt the private key. If you loss the password, you can no longer decrypt the operator private key)
+      (Note: This password will be used to decrypt the private key. If you lose the password, you can no longer decrypt the operator private key)
     inputType: password
     required: true
     if: { "setup-mode": { "enum": ["New Operator"] } }

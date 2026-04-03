@@ -13,27 +13,33 @@ PASSWORD_FILE_PATH="/root/keys/password.txt"
 KEY_FILE_PATH="/root/keys/encrypted_private_key.json"
 sleep 1
 
-# If Import Operator, save the EXISTING_PASSWORD to the password.txt,
+# If Import Operator, save the EXISTING_PASSWORD to the password.txt at first import
 # Later when Anchor is starting it will use --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
-    echo "$EXISTING_PASSWORD" > "$PASSWORD_FILE_PATH"
 
-    echo "[INFO - entrypoint] Using existing password to import operator"
-    if [ ! -f $KEY_FILE_PATH ]; then
+    # Only write password to password file on first time setup when password file does not exist
+    # this means that subsequent changes in EXISTING_PASSWORD will not be effective
+    # this also means that users must provide the correct password during the first time setup
+    if [ ! -f "$PASSWORD_FILE_PATH" ]; then
+        echo "$EXISTING_PASSWORD" > "$PASSWORD_FILE_PATH"
+    fi
+
+    echo "[INFO - entrypoint] Using uploaded key to import operator"
+    if [ ! -f "$KEY_FILE_PATH" ]; then
         echo "[DEBUG] encrypted_private_key.json doesn't exist, restarting"
         exit 1
-    fi    
+    fi
 fi
 
-# If New Operator, generate a new public-private key pair
+# If New Operator, generate a new public-private key pair during the first time setup
 if [ "${SETUP_MODE}" = "New Operator" ]; then
-    echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
-
     # Check if the key file exists
     if [ -f "$KEY_FILE_PATH" ]; then
         echo "[INFO - entrypoint] Key already exists, skipping key generation"
     else
-    # If key file does not exist, generate a new key pair
+        # Only write password and generate key when creating a new key pair
+        # same case as Import Operator, subsequent changes in NEW_PASSWORD will not be effective
+        echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "[INFO - entrypoint] Generating new public-private key pair"
         anchor keygen --encrypt --password-file="$PASSWORD_FILE_PATH" --data-dir /root/keys
     fi
