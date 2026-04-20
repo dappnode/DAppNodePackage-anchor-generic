@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # shellcheck disable=SC1091 
 # Path is relative to the Dockerfile
@@ -11,29 +11,34 @@ BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
 PASSWORD_FILE_PATH="/root/keys/password.txt"
 KEY_FILE_PATH="/root/keys/encrypted_private_key.json"
-sleep 1
+sleep 5
 
 # If Import Operator, save the EXISTING_PASSWORD to the password.txt,
 # Later when Anchor is starting it will use --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
-    echo "$EXISTING_PASSWORD" > "$PASSWORD_FILE_PATH"
-
     echo "[INFO - entrypoint] Using existing password to import operator"
-    if [ ! -f $KEY_FILE_PATH ]; then
+    if [ ! -f "$KEY_FILE_PATH" ]; then
         echo "[DEBUG] encrypted_private_key.json doesn't exist, restarting"
         exit 1
-    fi    
+    fi
+    if [ -z "$EXISTING_PASSWORD" ]; then
+        echo "[ERROR - entrypoint] EXISTING_PASSWORD is required in Import Operator mode"
+        exit 1
+    fi
+    echo "$EXISTING_PASSWORD" > "$PASSWORD_FILE_PATH"
 fi
 
-# If New Operator, generate a new public-private key pair
-if [ "${SETUP_MODE}" = "New Operator" ]; then
-    echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
-
-    # Check if the key file exists
+# New install or update flow.
+# Keep existing key+password pairing on updates; only require NEW_PASSWORD for first-time key generation.
+if [ "${SETUP_MODE}" = "New Operator / Update" ] || [ "${SETUP_MODE}" = "New Operator" ]; then
     if [ -f "$KEY_FILE_PATH" ]; then
-        echo "[INFO - entrypoint] Key already exists, skipping key generation"
+        echo "[INFO - entrypoint] Key already exists, preserving existing password and skipping key generation"
     else
-    # If key file does not exist, generate a new key pair
+        if [ -z "$NEW_PASSWORD" ]; then
+            echo "[ERROR - entrypoint] NEW_PASSWORD is required when generating a new operator key"
+            exit 1
+        fi
+        echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "[INFO - entrypoint] Generating new public-private key pair"
         anchor keygen --encrypt --password-file="$PASSWORD_FILE_PATH" --data-dir /root/keys
     fi

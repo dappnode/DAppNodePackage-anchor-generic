@@ -7,9 +7,10 @@ fields:
       service: operator
     title: Setup Mode
     description: |-
-      If this is the first install, choose "New operator". If you have an existing operator key, choose "Import Operator".
+      If this is the first install or a regular update, choose "New Operator / Update".
+      If you have an existing operator key from another installation, choose "Import Operator".
     enum:
-      - "New Operator"
+      - "New Operator / Update"
       - "Import Operator"
     required: true
 
@@ -35,7 +36,7 @@ fields:
     description: |
       Enter the password for the existing private key
     inputType: password
-    required: false
+    required: true
     if: { "setup-mode": { "enum": ["Import Operator"] } }
 
   - id: new-private-key-password
@@ -46,9 +47,10 @@ fields:
     title: Password for the new private key
     secret: true
     description: |
-      Enter a password to encrypt your private key
+      Enter a password to encrypt your private key.
+      This is required only when creating a brand-new operator.
 
       (Note: This password will be used to decrypt the private key. If you loss the password, you can no longer decrypt the operator private key)
     inputType: password
-    required: true
-    if: { "setup-mode": { "enum": ["New Operator"] } }
+    required: false
+    if: { "setup-mode": { "enum": ["New Operator / Update"] } }
