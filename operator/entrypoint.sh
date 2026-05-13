@@ -59,6 +59,10 @@ FLAGS="--network=${NETWORK} \
     --metrics-address=0.0.0.0 \
     --metrics-port=5164 \
     --port=${P2P_PORT} \
+    --quic-port=${QUIC_PORT} \
+    --enr-udp-port=${P2P_PORT} \
+    --enr-tcp-port=${P2P_PORT} \
+    --enr-quic-port=${QUIC_PORT} \
     --password-file=${PASSWORD_FILE_PATH} \
     $KEY_FILE $EXTRA_OPTS"
 

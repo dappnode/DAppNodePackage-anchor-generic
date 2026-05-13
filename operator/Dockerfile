@@ -4,9 +4,11 @@ FROM sigp/anchor:${UPSTREAM_VERSION}
 
 ARG NETWORK
 ARG P2P_PORT
+ARG QUIC_PORT
 ARG STAKER_SCRIPTS_VERSION
 
 ENV P2P_PORT=${P2P_PORT} \
+    QUIC_PORT=${QUIC_PORT} \
     HTTP_PORT=5062 \
     STAKER_SCRIPTS_URL=https://github.com/dappnode/staker-package-scripts/releases/download/${STAKER_SCRIPTS_VERSION}
 
