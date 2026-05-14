@@ -43,11 +43,6 @@
   },
   "backup": [
     {
-      "name": "data",
-      "path": "/root/.anchor",
-      "service": "operator"
-    },
-    {
       "name": "keys",
       "path": "/root/keys",
       "service": "operator"
