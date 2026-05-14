@@ -4,8 +4,8 @@ services:
       args:
         NETWORK: hoodi
         P2P_PORT: 9102
+        QUIC_PORT: 9103
     ports:
       - "9102:9102/tcp"
       - "9102:9102/udp"
-    environment:
-      CORSDOMAIN: "http://anchor-hoodi.dappnode"
+      - "9103:9103/udp"
