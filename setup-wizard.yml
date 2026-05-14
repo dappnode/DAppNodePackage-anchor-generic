@@ -35,7 +35,7 @@ fields:
     description: |
       Enter the password for the existing private key
     inputType: password
-    required: true
+    required: false
     if: { "setup-mode": { "enum": ["Import Operator"] } }
 
   - id: new-private-key-password
