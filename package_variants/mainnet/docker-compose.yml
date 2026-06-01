@@ -9,3 +9,10 @@ services:
       - "9100:9100/tcp"
       - "9100:9100/udp"
       - "9101:9101/udp"
+  dkg:
+    build:
+      args:
+        NETWORK: mainnet
+        DKG_PORT: 15516
+    ports:
+      - "15516:15516"
