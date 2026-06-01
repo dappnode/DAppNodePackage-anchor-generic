@@ -13,6 +13,8 @@ RUN apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/co
 COPY dkg-config.yml /ssv-dkg/config/dkg-config.yml
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 ENV DKG_PORT=${DKG_PORT} \
     DKG_DATA_DIR=/data/dkg \
     OPERATOR_DATA_DIR=/root/keys \
