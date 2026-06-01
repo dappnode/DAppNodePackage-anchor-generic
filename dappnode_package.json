@@ -8,7 +8,7 @@
     {
       "repo": "ssvlabs/ssv-dkg",
       "version": "v3.1.0",
-      "arg": "DKG_UPSTREAM_VERSION"
+      "arg": "DGK_UPSTREAM_VERSION"
     },
     {
       "repo": "dappnode/staker-package-scripts",

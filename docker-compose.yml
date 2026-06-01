@@ -20,7 +20,7 @@ services:
     build:
       context: dkg
       args:
-        DKG_UPSTREAM_VERSION: v3.1.0
+        DGK_UPSTREAM_VERSION: v3.1.0
         STAKER_SCRIPTS_VERSION: v0.1.2
     restart: on-failure
     volumes:
