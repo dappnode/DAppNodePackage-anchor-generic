@@ -11,7 +11,31 @@ BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
 PASSWORD_FILE_PATH="/root/keys/password.txt"
 KEY_FILE_PATH="/root/keys/encrypted_private_key.json"
+PUBLIC_KEY_FILE_PATH="/root/keys/public_key.txt"
 sleep 1
+
+post_pubkey_to_dappmanager() {
+  PUBLIC_KEY=$(cat "$PUBLIC_KEY_FILE_PATH")
+
+  if [ -z "$PUBLIC_KEY" ]; then
+    echo "[ERROR - entrypoint] Public key not found at ${PUBLIC_KEY_FILE_PATH}, skipping Dappmanager post"
+    return 1
+  fi
+
+  curl --connect-timeout 5 \
+    --max-time 10 \
+    --silent \
+    --retry 5 \
+    --retry-delay 0 \
+    --retry-max-time 40 \
+    -X POST "http://dappmanager.dappnode/data-send?key=OperatorPublicKey&data=${PUBLIC_KEY}" || \
+    {
+      echo "[ERROR - entrypoint] Failed to post public key to Dappmanager"
+    }
+
+  echo "[INFO - entrypoint] Use this public key to register your node on the SSV network:"
+  echo "PUBLIC_KEY=${PUBLIC_KEY}"
+}
 
 # If Import Operator, save the EXISTING_PASSWORD to the password.txt at first import
 # Later when Anchor is starting it will use --password-file flag to decrypt the private key
@@ -50,6 +74,8 @@ if [ -f "$KEY_FILE_PATH" ]; then
 else 
     KEY_FILE=""
 fi
+
+post_pubkey_to_dappmanager
 
 FLAGS="--network=${NETWORK} \
     --data-dir=/root/.anchor \
