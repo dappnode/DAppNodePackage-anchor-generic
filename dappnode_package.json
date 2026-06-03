@@ -16,7 +16,7 @@
       "arg": "STAKER_SCRIPTS_VERSION"
     }
   ],
-  "architectures": ["linux/amd64"],
+  "architectures": ["linux/amd64", "linux/arm64"],
   "shortDescription": "Anchor",
   "description": "Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by Sigma Prime.",
   "type": "service",
