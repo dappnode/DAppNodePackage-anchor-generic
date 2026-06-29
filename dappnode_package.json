@@ -29,7 +29,6 @@
   ],
   "description": "Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by Sigma Prime.",
   "license": "Apache-2.0",
-  "mainService": "operator",
   "links": {
     "Documentation": "https://anchor.sigmaprime.io/introduction/",
     "Github": "https://github.com/sigp/anchor",
@@ -39,6 +38,7 @@
     "SSV Web App": "http://app.ssv.network",
     "Support": "https://discord.com/invite/cyAszAh"
   },
+  "mainService": "operator",
   "repository": {
     "type": "git",
     "url": "https://github.com/dappnode/DAppNodePackage-Anchor.git"
@@ -57,7 +57,7 @@
     {
       "arg": "DKG_UPSTREAM_VERSION",
       "repo": "ssvlabs/ssv-dkg",
-      "version": "v3.0.3"
+      "version": "v3.1.0"
     },
     {
       "arg": "STAKER_SCRIPTS_VERSION",
