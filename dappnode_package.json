@@ -14,6 +14,7 @@
       "name": "dkg-output",
       "path": "/data/dkg/output",
       "service": "dkg"
+    }
   ],
   "bugs": {
     "url": "https://github.com/dappnode/DAppNodePackage-Anchor/issues"
