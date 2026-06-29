@@ -55,9 +55,9 @@
       "version": "v1.2.4"
     },
     {
-      "name": "dkg-output",
-      "path": "/data/dkg/output",
-      "service": "dkg"
+      "arg": "DKG_UPSTREAM_VERSION",
+      "repo": "ssvlabs/ssv-dkg",
+      "version": "v3.0.3"
     },
     {
       "arg": "STAKER_SCRIPTS_VERSION",
