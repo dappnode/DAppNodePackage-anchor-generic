@@ -16,6 +16,21 @@ services:
       EXTRA_OPTS: ""
       EXISTING_PASSWORD: ""
       NEW_PASSWORD: ""
+  dkg:
+    build:
+      context: dkg
+      args:
+        DKG_UPSTREAM_VERSION: v3.0.3
+        STAKER_SCRIPTS_VERSION: v0.1.2
+    restart: on-failure
+    volumes:
+      - operator-keys:/root/keys
+      - dkg-data:/data/dkg
+    environment:
+      LOG_LEVEL: info
+      OPERATOR_ID: ""
+      EXTRA_OPTS: ""
 volumes:
   operator-data: {}
   operator-keys: {}
+  dkg-data: {}

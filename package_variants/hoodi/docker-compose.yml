@@ -9,3 +9,10 @@ services:
       - "9102:9102/tcp"
       - "9102:9102/udp"
       - "9103:9103/udp"
+  dkg:
+    build:
+      args:
+        NETWORK: hoodi
+        DKG_PORT: 15514
+    ports:
+      - "15514:15514"

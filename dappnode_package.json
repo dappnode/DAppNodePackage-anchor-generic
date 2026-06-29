@@ -9,6 +9,11 @@
       "name": "keys",
       "path": "/root/keys",
       "service": "operator"
+    },
+    {
+      "name": "dkg-output",
+      "path": "/data/dkg/output",
+      "service": "dkg"
     }
   ],
   "bugs": {
@@ -24,6 +29,7 @@
   ],
   "description": "Anchor is an open source implementation of the Secret Shared Validator (SSV) protocol, written in Rust and maintained by Sigma Prime.",
   "license": "Apache-2.0",
+  "mainService": "operator",
   "links": {
     "Documentation": "https://anchor.sigmaprime.io/introduction/",
     "Github": "https://github.com/sigp/anchor",
@@ -47,6 +53,11 @@
       "arg": "UPSTREAM_VERSION",
       "repo": "sigp/anchor",
       "version": "v1.2.4"
+    },
+    {
+      "arg": "DKG_UPSTREAM_VERSION",
+      "repo": "ssvlabs/ssv-dkg",
+      "version": "v3.0.3"
     },
     {
       "arg": "STAKER_SCRIPTS_VERSION",
