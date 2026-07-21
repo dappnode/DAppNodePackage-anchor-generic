@@ -46,7 +46,7 @@
   "requirements": {
     "minimumDappnodeVersion": "0.2.101"
   },
-  "shortDescription": "Anchor",
+  "shortDescription": "Secret Shared Validator (SSV) protocol client in Rust",
   "type": "service",
   "upstream": [
     {
