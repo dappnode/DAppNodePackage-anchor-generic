@@ -1,6 +1,4 @@
 {
-  "name": "anchor-hoodi.dnp.dappnode.eth",
-  "version": "0.1.0",
   "globalEnvs": [
     {
       "envs": [
@@ -11,5 +9,7 @@
         "operator"
       ]
     }
-  ]
+  ],
+  "name": "anchor-hoodi.dnp.dappnode.eth",
+  "version": "0.1.4"
 }
