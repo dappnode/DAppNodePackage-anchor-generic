@@ -20,7 +20,7 @@ services:
     build:
       context: dkg
       args:
-        DKG_UPSTREAM_VERSION: v3.1.0
+        DKG_IMAGE: public.ecr.aws/h4h2r1n7/dkg@sha256:117a70e6c92b7b9a0943a309649bf99ca1d1c7c50b408d6cfc2527090732e404
         STAKER_SCRIPTS_VERSION: v0.1.2
     restart: on-failure
     volumes:
