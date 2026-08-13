@@ -53,6 +53,9 @@ if [ "${SETUP_MODE}" = "Import Operator" ]; then
         echo "[DEBUG] encrypted_private_key.json doesn't exist, restarting"
         exit 1
     fi
+
+    # Extract the public key from the imported encrypted_private_key.json
+    jq -r '.pubKey' "$KEY_FILE_PATH" > "$PUBLIC_KEY_FILE_PATH"
 fi
 
 # If New Operator, generate a new public-private key pair during the first time setup
