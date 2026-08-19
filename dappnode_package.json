@@ -52,7 +52,7 @@
     {
       "arg": "UPSTREAM_VERSION",
       "repo": "sigp/anchor",
-      "version": "v1.3.0"
+      "version": "v1.3.1"
     },
     {
       "arg": "DKG_UPSTREAM_VERSION",
