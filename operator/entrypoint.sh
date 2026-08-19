@@ -55,7 +55,11 @@ if [ "${SETUP_MODE}" = "Import Operator" ]; then
     fi
 
     # Extract the public key from the imported encrypted_private_key.json
-    jq -r '.pubkey // .pubKey // empty' "$KEY_FILE_PATH" > "$PUBLIC_KEY_FILE_PATH"
+    PUBLIC_KEY=$(jq -r '.pubkey // .pubKey // empty' "$KEY_FILE_PATH")
+    # Only writing the file when non-empty
+    if [ -n "$PUBLIC_KEY" ]; then
+    printf '%s\n' "$PUBLIC_KEY" > "$PUBLIC_KEY_FILE_PATH"
+    fi
 fi
 
 # If New Operator, generate a new public-private key pair during the first time setup
