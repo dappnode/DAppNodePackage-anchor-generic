@@ -58,7 +58,7 @@ if [ "${SETUP_MODE}" = "Import Operator" ]; then
     PUBLIC_KEY=$(jq -r '.pubkey // .pubKey // empty' "$KEY_FILE_PATH")
     # Only writing the file when non-empty
     if [ -n "$PUBLIC_KEY" ]; then
-    printf '%s\n' "$PUBLIC_KEY" > "$PUBLIC_KEY_FILE_PATH"
+    echo "$PUBLIC_KEY" > "$PUBLIC_KEY_FILE_PATH"
     fi
 fi
 
