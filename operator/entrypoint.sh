@@ -9,16 +9,16 @@ EXECUTION_RPC=$(get_execution_rpc_api_url_from_global_env "$NETWORK")
 EXECUTION_WS=$(get_execution_ws_url_from_global_env "$NETWORK")
 BEACON_NODES=$(get_beacon_api_url_from_global_env "$NETWORK")
 
-PASSWORD_FILE_PATH="/root/keys/password.txt"
+PASSWORD_FILE_PATH="/root/keys/private_key_password"
 KEY_FILE_PATH="/root/keys/encrypted_private_key.json"
-PUBLIC_KEY_FILE_PATH="/root/keys/public_key.txt"
 sleep 1
 
 post_pubkey_to_dappmanager() {
-  PUBLIC_KEY=$(cat "$PUBLIC_KEY_FILE_PATH")
+  # The public key is embedded in the encrypted private key file
+  PUBLIC_KEY=$(jq -r '.pubkey // .pubKey // empty' "$KEY_FILE_PATH")
 
   if [ -z "$PUBLIC_KEY" ]; then
-    echo "[ERROR - entrypoint] Public key not found at ${PUBLIC_KEY_FILE_PATH}, skipping Dappmanager post"
+    echo "[ERROR - entrypoint] Public key not found in ${KEY_FILE_PATH}, skipping Dappmanager post"
     return 1
   fi
 
@@ -37,7 +37,7 @@ post_pubkey_to_dappmanager() {
   echo "PUBLIC_KEY=${PUBLIC_KEY}"
 }
 
-# If Import Operator, save the EXISTING_PASSWORD to the password.txt at first import
+# In Import Operator, save the EXISTING_PASSWORD to the password file at first import
 # Later when Anchor is starting it will use --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
 
@@ -53,13 +53,6 @@ if [ "${SETUP_MODE}" = "Import Operator" ]; then
         echo "[DEBUG] encrypted_private_key.json doesn't exist, restarting"
         exit 1
     fi
-
-    # Extract the public key from the imported encrypted_private_key.json
-    PUBLIC_KEY=$(jq -r '.pubkey // .pubKey // empty' "$KEY_FILE_PATH")
-    # Only writing the file when non-empty
-    if [ -n "$PUBLIC_KEY" ]; then
-    echo "$PUBLIC_KEY" > "$PUBLIC_KEY_FILE_PATH"
-    fi
 fi
 
 # If New Operator, generate a new public-private key pair during the first time setup
@@ -73,6 +66,8 @@ if [ "${SETUP_MODE}" = "New Operator" ]; then
         echo "$NEW_PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "[INFO - entrypoint] Generating new public-private key pair"
         anchor keygen --encrypt --password-file="$PASSWORD_FILE_PATH" --data-dir /root/keys
+        # keygen also writes public_key.txt, remove it to keep it out of the backup files
+        rm -f /root/keys/public_key.txt
     fi
 fi
 

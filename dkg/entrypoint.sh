@@ -6,8 +6,8 @@ DKG_OUTPUT_DIR=${DKG_DATA_DIR}/output
 DKG_CERT_DIR=${DKG_DATA_DIR}/ssl
 
 PRIVATE_KEY_FILE=${OPERATOR_CONFIG_DIR}/encrypted_private_key.json
-PRIVATE_KEY_PASSWORD_FILE=${OPERATOR_CONFIG_DIR}/password.txt
-OPERATOR_ID_FILE=/data/dkg/operator_id.txt
+PRIVATE_KEY_PASSWORD_FILE=${OPERATOR_CONFIG_DIR}/private_key_password
+OPERATOR_ID_FILE=${OPERATOR_CONFIG_DIR}/operator_id.txt
 DKG_CONFIG_FILE=${DKG_CONFIG_DIR}/dkg-config.yml
 DKG_LOG_FILE=${DKG_LOGS_DIR}/dkg.log
 
@@ -61,7 +61,8 @@ get_operator_id() {
 fetch_operator_id_from_api() {
     echo "[INFO] OPERATOR_ID not provided. Fetching OPERATOR_ID from the API..."
 
-    PUBLIC_KEY=$(jq -r '.pubKey' "${PRIVATE_KEY_FILE}")
+    # Anchor generates keys with '.pubkey', SSV with '.pubKey'
+    PUBLIC_KEY=$(jq -r '.pubkey // .pubKey' "${PRIVATE_KEY_FILE}")
 
     # If the PUBLIC_KEY is empty, try extracting using the '.publicKey' field (for previous SSV versions)
     if [ -z "$PUBLIC_KEY" ] || [ "$PUBLIC_KEY" = "null" ]; then
