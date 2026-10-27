@@ -12,5 +12,5 @@
   ],
   "name": "anchor.dnp.dappnode.eth",
   "shortDescription": "SSV protocol client in Rust for Ethereum mainnet",
-  "version": "0.1.8"
+  "version": "0.1.9"
 }
