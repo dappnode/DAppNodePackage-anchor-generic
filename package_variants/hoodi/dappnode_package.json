@@ -12,5 +12,5 @@
   ],
   "name": "anchor-hoodi.dnp.dappnode.eth",
   "shortDescription": "SSV protocol client in Rust for Hoodi testnet",
-  "version": "0.1.8"
+  "version": "0.1.9"
 }
