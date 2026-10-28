@@ -37,6 +37,13 @@ post_pubkey_to_dappmanager() {
   echo "PUBLIC_KEY=${PUBLIC_KEY}"
 }
 
+# Packages installed before 0.1.9 (Anchor 1.4.1) stored the password in password.txt
+# rename it so that it is backward-compatible
+if [ -f /root/keys/password.txt ]; then
+    echo "[INFO - entrypoint] Renaming password.txt to private_key_password"
+    mv -f /root/keys/password.txt "$PASSWORD_FILE_PATH"
+fi
+
 # In Import Operator, save the EXISTING_PASSWORD to the password file at first import
 # Later when Anchor is starting it will use --password-file flag to decrypt the private key
 if [ "${SETUP_MODE}" = "Import Operator" ]; then
