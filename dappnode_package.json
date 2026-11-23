@@ -14,6 +14,16 @@
       "name": "dkg-output",
       "path": "/data/dkg/output",
       "service": "dkg"
+    },
+    {
+      "name": "slashing-protection",
+      "path": "/root/.anchor/slashing_protection.sqlite",
+      "service": "operator"
+    },
+    {
+      "name": "builder-definitions",
+      "path": "/root/.anchor/builder_definitions.yml",
+      "service": "operator"
     }
   ],
   "bugs": {
